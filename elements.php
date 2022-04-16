@@ -138,7 +138,7 @@
 									</div>
 									</form>
 								<form method="post" style="width:100%;" action="elementssent.php">
-									<table class="alt" >
+									<table class="alt">
 										<!--
 										<thead>
 											<tr style="height:20px;">
@@ -179,80 +179,68 @@
 												?>
 												<tr>
 													<th style="text-align: center;width:20%;"><div style="overflow:auto;width:100%;height:120px;">准考證號<br>姓名<br>梯次場次<br>考生狀態</div></th>
-												</tr>
-												<tr>
-													<td rowspan="6" style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[0]."<br>".$DATA_rowres[3]."<br>".$DATA_rowres[4]."-".$DATA_rowres[5]."-".$DATA_rowres[7]."(".$DATA_rowres[5].")"."<br>".$DATA_rowres[6]?></td>
-												</tr>
-
-												<tr>
 													<th style="text-align: center;width:42%;height:10%;"><div style="overflow:auto;width:100%;height:42px;">題目</div></th>
+													<th>分數</th>
 												</tr>
+												<tr>
+													<td rowspan="4" style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[0]."<br>".$DATA_rowres[3]."<br>".$DATA_rowres[4]."-".$DATA_rowres[5]."-".$DATA_rowres[7]."(".$DATA_rowres[5].")"."<br>".$DATA_rowres[6]?></td>
+
 												<?php
 													if($DATA_rowres[8]=="1")
 													{
 												?>
-												<tr>
 												<td style="background-color:<?php echo $Color?>"><?php echo "軟體設計與應用<br>".$DATA_rowres[9] ?></td>
-											</tr>
+
 												<?php
 													}
 													else if($DATA_rowres[8]=="2")
 													{
 												?>
-												<tr>
 												<td style="background-color:<?php echo $Color?>"><?php echo "嵌入式系統與應用<br>".$DATA_rowres[9] ?></td>
-											</tr>
+
 												<?php
 													}
 													else if($DATA_rowres[8]=="3")
 													{
 												?>
-												<tr>
+
 												<td style="background-color:<?php echo $Color?>"><?php echo "網路通訊與應用<br>".$DATA_rowres[9]?></td>
-											</tr>
+
 												<?php
 
 													}
 													else
 													{
 														?>
-													<tr>
-															<td style="background-color:<?php echo $Color?>"></td>
-													</tr>
 
+															<td style="background-color:<?php echo $Color?>"></td>
 													<?php
 													}
-													if($DATA_rowres[10]!='')
-													{
 													?>
-													<tr>
-													<td style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[10]?></td>
-												</tr>
-													<?php
-														}
-													if($DATA_rowres[10]!='')
-														{
-													?>
-													<tr>
-													<td style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[11] ?></td>
-												</tr>
-													<?php
-														}
-													if($DATA_rowres[10]!='')
-														{
-													?>
-													<tr>
-													<td style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[12] ?></td>
-												</tr>
-													<?php
-														}
-													?>
-													<th style="text-align: center;width:20%;"><div style="overflow:auto;width:100%;height:120px;">分數註記</div></th>
-													<tr>
 													<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
 													<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
-												</tr>
+													<tr>
+														<td style="background-color:<?php echo $Color?>">Q1<?php echo $DATA_rowres[10]?></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+													</tr>
+													<tr>
+														<td style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[11] ?></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+													</tr>
 
+													<tr>
+														<td style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[11] ?></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+													</tr>
+
+<<!--													<th style="text-align: center;width:20%;"><div style="overflow:auto;width:100%;height:120px;">分數註記</div></th>
+													<tr>
+
+												</tr>
+-->
 											<?php
 											}?>
 										</tbody>
