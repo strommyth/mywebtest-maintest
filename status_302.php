@@ -69,7 +69,7 @@
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(考場內使用)</a></li>
+							<li><a href="elements.php">資料顯示(面試使用)</a></li>
 					<?php
 						}
 					?>
@@ -130,8 +130,8 @@
 										<tbody>
 										<?php
 
-											$A_sql_status="SELECT * FROM `Candidate` WHERE `Class`='T' ORDER BY `Candidate`.`Time` ASC, `Candidate`.`round` ASC , `Candidate`.`Number` ASC";
-											$B_sql_status="SELECT * FROM `Candidate` WHERE `Class`='T' ORDER BY `Candidate`.`Time` ASC, `Candidate`.`round` ASC , `Candidate`.`Number` ASC";
+											$A_sql_status="SELECT * FROM `candidate` WHERE `Class`='T' ORDER BY `candidate`.`Time` ASC, `candidate`.`round` ASC , `candidate`.`Number` ASC";
+											$B_sql_status="SELECT * FROM `candidate` WHERE `Class`='T' ORDER BY `candidate`.`Time` ASC, `candidate`.`round` ASC , `candidate`.`Number` ASC";
 											$A_result_status=mysqli_query($db_link,$A_sql_status) or die("查詢失敗");
 											$B_result_status=mysqli_query($db_link,$B_sql_status) or die("查詢失敗");
 											while ($A_rowres = mysqli_fetch_array($A_result_status, MYSQLI_BOTH))

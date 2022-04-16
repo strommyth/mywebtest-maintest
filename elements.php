@@ -60,7 +60,7 @@
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(考場內使用)</a></li>
+							<li><a href="elements.php">資料顯示(題目使用)</a></li>
 					<?php
 						}
 					?>
@@ -84,7 +84,7 @@
 		<!-- Two -->
 			<section id="two" class="wrapper  special">
 				<div class="inner" style="max-width:90%">
-					<h2>資料顯示(考場內使用)</h2>
+					<h2>資料顯示(題目使用)</h2>
 					<h3>請等待<font style="background:#9BF6FF">"藍格"</font>的人的到來</h3>
 					<h3>面試完畢後請點選按鈕確認變成<font style="background:#A0C4FF">"靛格"</font></h3>
 						<div class="12u">
@@ -93,7 +93,7 @@
 									<?php
 										if(isset($_POST['RefreshData']))
 										{
-											$SQL_DATA="SELECT * FROM `Candidate` WHERE `Class`=\"".$_POST['class']."\"and`Time`=\"".$_POST['time']."\" ORDER BY `Candidate`.`Time` ASC, `Candidate`.`round` ASC , `Candidate`.`Number` ASC";
+											$SQL_DATA="SELECT * FROM `candidate` WHERE `Class`=\"".$_POST['class']."\"and`Time`=\"".$_POST['time']."\"and `Round`=\"".$_POST['round']."\" ORDER BY `candidate`.`Time` ASC, `candidate`.`round` ASC , `candidate`.`Number` ASC ,`candidate`.`Round` ASC";
 											$DATA_result_status=mysqli_query($db_link,$SQL_DATA) or die("查詢失敗");
 										}
 									?>
@@ -103,19 +103,19 @@
 										</select>
 										<select name="time"style="width:30%;float:left">
 
-											<option value="01"<?php if($_POST['time']=="01") echo "selected"?>>1</option>
-											<option value="02"<?php if($_POST['time']=="02") echo "selected"?>>2</option>
-											<option value="03"<?php if($_POST['time']=="03") echo "selected"?>>3</option>
-											<option value="04"<?php if($_POST['time']=="04") echo "selected"?>>4</option>
-											<option value="05"<?php if($_POST['time']=="05") echo "selected"?>>5</option>
-											<option value="06"<?php if($_POST['time']=="06") echo "selected"?>>6</option>
-											<option value="07"<?php if($_POST['time']=="07") echo "selected"?>>7</option>
-											<option value="08"<?php if($_POST['time']=="08") echo "selected"?>>8</option>
-											<option value="09"<?php if($_POST['time']=="09") echo "selected"?>>9</option>
+											<option value="1"<?php if($_POST['time']=="1") echo "selected"?>>1</option>
+											<option value="2"<?php if($_POST['time']=="2") echo "selected"?>>2</option>
+											<option value="3"<?php if($_POST['time']=="3") echo "selected"?>>3</option>
+											<option value="4"<?php if($_POST['time']=="4") echo "selected"?>>4</option>
+											<option value="5"<?php if($_POST['time']=="5") echo "selected"?>>5</option>
+											<option value="6"<?php if($_POST['time']=="6") echo "selected"?>>6</option>
+											<option value="7"<?php if($_POST['time']=="7") echo "selected"?>>7</option>
+											<option value="8"<?php if($_POST['time']=="8") echo "selected"?>>8</option>
+											<option value="9"<?php if($_POST['time']=="9") echo "selected"?>>9</option>
 											<option value="10"<?php if($_POST['time']=="10") echo "selected"?>>10</option>
 											<option value="11"<?php if($_POST['time']=="11") echo "selected"?>>11</option>
 										</select>
-										<!--
+
 										<select name="round"style="width:30%;float:left">
 											<option value="1"<?php if($_POST['round']=="1") echo "selected"?>>1</option>
 											<option value="2"<?php if($_POST['round']=="2") echo "selected"?>>2</option>
@@ -132,8 +132,9 @@
 											<option value="13"<?php if($_POST['round']=="13") echo "selected"?>>13</option>
 											<option value="14"<?php if($_POST['round']=="14") echo "selected"?>>14</option>
 											<option value="15"<?php if($_POST['round']=="15") echo "selected"?>>15</option>
+
 										</select>
-									-->
+
 										<button class="button special small" style="float:left;width:10%;padding:0 0.3em" name="RefreshData">查詢</button>
 									</div>
 									</form>
@@ -180,7 +181,8 @@
 												<tr>
 													<th style="text-align: center;width:20%;"><div style="overflow:auto;width:100%;height:120px;">准考證號<br>姓名<br>梯次場次<br>考生狀態</div></th>
 													<th style="text-align: center;width:42%;height:10%;"><div style="overflow:auto;width:100%;height:42px;">題目</div></th>
-													<th>分數</th>
+													<th>T1分數</th>
+													<th>T2分數</th>
 												</tr>
 												<tr>
 													<td rowspan="4" style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[0]."<br>".$DATA_rowres[3]."<br>".$DATA_rowres[4]."-".$DATA_rowres[5]."-".$DATA_rowres[7]."(".$DATA_rowres[5].")"."<br>".$DATA_rowres[6]?></td>
@@ -189,7 +191,7 @@
 													if($DATA_rowres[8]=="1")
 													{
 												?>
-												<td style="background-color:<?php echo $Color?>"><?php echo "軟體設計與應用<br>".$DATA_rowres[9] ?></td>
+												<td style="background-color:<?php echo $Color?>"><font color = "orange"><?php echo "軟體設計與應用<br>"?></font><?php echo $DATA_rowres[9] ?></td>
 
 												<?php
 													}
@@ -217,23 +219,25 @@
 													<?php
 													}
 													?>
-													<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
-													<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+													<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q1_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[19]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q1_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q1_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[29]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q1_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[24]?></textarea></td>
 													<tr>
-														<td style="background-color:<?php echo $Color?>">Q1<?php echo $DATA_rowres[10]?></td>
-														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
-														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><font color="orange">假設您現在已經取得資訊工程學位，您想利用資訊科技來改善甚麼?怎麼做?<br></font><?php echo $DATA_rowres[10]?></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q2_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[20]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q2_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+															<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q2_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[30]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q2_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[25]?></textarea></td>
 													</tr>
 													<tr>
-														<td style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[11] ?></td>
-														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
-														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><font color="orange">最近令您印象深刻的資訊科技相關新聞是甚麼?為甚麼?<br></font><?php echo $DATA_rowres[11] ?></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q3_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[21]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q3_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[16]?></textarea></td>
+															<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q3_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[31]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q3_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[26]?></textarea></td>
+
 													</tr>
 
 													<tr>
-														<td style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[11] ?></td>
-														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
-														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_stunotice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><font color="orange">您認為就讀資訊工程的學生，需要具備怎麼樣的能力或特質呢?<br></font><?php echo $DATA_rowres[11] ?></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q4_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[22]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q4_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[17]?></textarea></td>
+														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q4_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[32]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q4_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[27]?></textarea></td>
+
 													</tr>
 
 <<!--													<th style="text-align: center;width:20%;"><div style="overflow:auto;width:100%;height:120px;">分數註記</div></th>

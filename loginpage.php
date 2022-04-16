@@ -18,28 +18,28 @@
 			echo"<script language=\"JavaScript\">alert('您已經登入');location.href=\"index.php\";</script>";
 		}
 		else
-		{	
+		{
 		}
 	?>
 	<!-- Header -->
 	<header>
 		<?php
-	if (isset($_COOKIE['GroupID'])) 
+	if (isset($_COOKIE['GroupID']))
 	{
 		//已經登入
-		if ($_COOKIE['GroupID']==-1) 
+		if ($_COOKIE['GroupID']==-1)
 		{
 			echo "<header id='header' style='background-color:white'>";
-		} 
-		else if ($_COOKIE['GroupID']%2==1) 
+		}
+		else if ($_COOKIE['GroupID']%2==1)
 		{
 			echo "<header id='header' style='background-color:#BFFFFF'>";
-		} 
-		else if ($_COOKIE['GroupID']%2==0) 
+		}
+		else if ($_COOKIE['GroupID']%2==0)
 		{
 			echo "<header id='header' style='background-color:#BFFFBF'>";
 		}
-	} 
+	}
 	else
 	{
 		echo "<header id='header' style='background-color:white'>";
@@ -87,7 +87,7 @@
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(考場內使用)</a></li>
+							<li><a href="elements.php">資料顯示(面試使用)</a></li>
 					<?php
 						}
 					?>
@@ -101,7 +101,7 @@
 							echo "<li><a href='logout.php' class='button fit'>Log out</a></li>";
 						}
 						else
-						{	
+						{
 							echo "<li><a href='loginpage.php' class='button fit'>Login</a></li>";
 						}
 					?>

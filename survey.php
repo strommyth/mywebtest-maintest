@@ -2,35 +2,35 @@
 
 <html>
 	<head>
-		
+
 		<title>東大資工面試報到</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body>
-	
-	
+
+
 		<!-- Header -->
 		<header>
 		<?php
-		if (isset($_COOKIE['GroupID'])) 
+		if (isset($_COOKIE['GroupID']))
 		{
 			//已經登入
-			if ($_COOKIE['GroupID']==-1) 
+			if ($_COOKIE['GroupID']==-1)
 			{
 				echo "<header id='header' style='background-color:white'>";
-			} 
-			else if ($_COOKIE['GroupID']%2==1) 
+			}
+			else if ($_COOKIE['GroupID']%2==1)
 			{
 				echo "<header id='header' style='background-color:#BFFFFF'>";
-			} 
-			else if ($_COOKIE['GroupID']%2==0) 
+			}
+			else if ($_COOKIE['GroupID']%2==0)
 			{
 				echo "<header id='header' style='background-color:#BFFFBF'>";
 			}
-		} 
-		else 
+		}
+		else
 		{
 			echo "<header id='header' style='background-color:white'>";
 		}
@@ -49,7 +49,7 @@
 							echo "<a href='logout.php' class='button alt'>Log Out</a>";
 						}
 						else
-						{	
+						{
 							echo"<script language=\"JavaScript\">alert('請先登入');location.href=\"loginpage.php\";</script>";
 						}
 					?>
@@ -78,7 +78,7 @@
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(考場內使用)</a></li>
+							<li><a href="elements.php">資料顯示(面試使用)</a></li>
 					<?php
 						}
 					?>
@@ -92,7 +92,7 @@
 							echo "<li><a href='logout.php' class='button fit'>Log out</a></li>";
 						}
 						else
-						{	
+						{
 							echo "<li><a href='loginpage.php' class='button fit'>Login</a></li>";
 						}
 					?>
@@ -114,7 +114,7 @@
 							<div class="12u">
 								<!-- Form -->
 									<?php
-										$sql_ANS="SELECT * FROM `Candidate` WHERE ExamID=\"".$_COOKIE['Uname']."\"";
+										$sql_ANS="SELECT * FROM `candidate` WHERE ExamID=\"".$_COOKIE['Uname']."\"";
 										require("conn_mysql.php");
 										$result_ANS=mysqli_query($db_link,$sql_ANS) or die("查詢失敗");
 										while ($ANS = mysqli_fetch_array($result_ANS, MYSQLI_BOTH))
@@ -126,17 +126,17 @@
 											$A4=$ANS[12];
 											$A5=$ANS[13];
 											break;
-										}	
-	
+										}
+
 									?>
-									
+
 									<form method="post" action="surveySet.php">
 										<div class="row uniform">
 											<h3>1.東大資工的課程地圖中，系上課程可以分為「軟體設計與應用」、「嵌入式系統與應用」、「網路通訊與應用」三大模組，請問您對哪一個模組最有興趣?為甚麼?</h3>
-											<!-- Break -->							
+											<!-- Break -->
 											<div class="4u 12u$(small)">
 											<?php
-											
+
 												if($Ac1=="1"||$Ac1=="0")
 													echo "<input type='radio' id='priority-low' name='Qc1' value='1' checked>";
 												else
@@ -145,7 +145,7 @@
 												<label for="priority-low">軟體設計與應用</label>
 											</div>
 											<div class="4u 12u$(small)">
-												<?php 
+												<?php
 												if($Ac1=="2")
 													echo "<input type='radio' id='priority-normal' name='Qc1' value='2' checked>";
 												else
@@ -163,7 +163,7 @@
 												<label for="priority-high">網路通訊與應用</label>
 											</div>
 											<div class="12u$">
-											<?php 
+											<?php
 											if($A1!="")
 													echo $A1;
 											else
@@ -195,18 +195,18 @@
 												*/
 											?>
 											-->
-											
+
 											<h3>2.假設您現在已經取得資訊工程學位，您想利用資訊科技來改善甚麼?怎麼做?</h3>
-											
+
 											<div class="12u$">
-											<?php 
+											<?php
 												if($A2!="")
 													echo $A2;
 												else
 													echo "<textarea name='Q2' id='Q2'  placeholder='請在此回答第二題' rows='4' style=' resize: none;'></textarea>";
 												?>
 											</div>
-											
+
 											<h3>3.最近令您印象深刻的資訊科技相關新聞是甚麼?為甚麼?</h3>
 											<!-- Break -->
 											<div class="12u$">
@@ -217,7 +217,7 @@
 												echo "<textarea name='Q3' id='Q3'  placeholder='請在此回答第三題' rows='4' style=' resize: none;'></textarea>";
 											?>
 											</div>
-											
+
 											<h3>4.您認為就讀資訊工程的學生，需要具備怎麼樣的能力或特質呢?</h3>
 											<!-- Break -->
 											<div class="12u$">
@@ -228,13 +228,13 @@
 												echo "<textarea name='Q4' id='Q4'  placeholder='請在此回答第四題' rows='4' style=' resize: none;'></textarea>";
 											?>
 											</div>
-											
-											
-											
+
+
+
 											<h3>5.除了報考東大資工外，您還有報考哪學校、科系?</h3>
 											<!-- Break -->
 											<div class="12u$">
-												<?php 
+												<?php
 												if($A5!="")
 													echo $A5;
 												else
@@ -271,7 +271,7 @@
 
 				</div>
 			</section>
-			
+
 			<?php
 			if ($Ac1=="0"&&$_COOKIE['Ulogin']=="考生") {
 			?>
@@ -279,8 +279,8 @@
 				<h2> 繳交倒數 </h2>
 				<h4 id="count">---</h4>
 			</div>
-			
-			
+
+
 			<?php
 				}
 			else  {
@@ -291,7 +291,7 @@
 			<?php
 				}
 			?>
-			
+
 				<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">

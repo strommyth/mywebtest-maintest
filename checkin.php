@@ -30,7 +30,7 @@
 								echo"<script language=\"JavaScript\">alert('當前帳號無權訪問此頁面');location.href=\"index.php\";</script>";
 						}
 						else
-						{	
+						{
 							echo"<script language=\"JavaScript\">alert('請先登入');location.href=\"loginpage.php\";</script>";
 						}
 					?>
@@ -55,7 +55,7 @@
 					<?php
 						}
 					?>
-					
+
 					<?php
 					if ($_COOKIE['Ulogin']=='class0') {
 					?>
@@ -63,14 +63,14 @@
 					<?php
 				}
 					?>
-					
-					
-					
+
+
+
 					<?php
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(考場內使用)</a></li>
+							<li><a href="elements.php">資料顯示(題目使用)</a></li>
 					<?php
 						}
 					?>
@@ -84,7 +84,7 @@
 							echo "<li><a href='logout.php' class='button fit'>Log out</a></li>";
 						}
 						else
-						{	
+						{
 							echo "<li><a href='loginpage.php' class='button fit'>Login</a></li>";
 						}
 					?>
@@ -130,8 +130,8 @@
 										</thead>
 										<tbody>
 										<?php
-											$A_sql_status="SELECT * FROM `Candidate` WHERE `Class`='T' ORDER BY `Candidate`.`Time` ASC, `Candidate`.`round` ASC , `Candidate`.`Number` ASC";
-											$B_sql_status="SELECT * FROM `Candidate` WHERE `Class`='T' ORDER BY `Candidate`.`Time` ASC, `Candidate`.`round` ASC , `Candidate`.`Number` ASC";
+											$A_sql_status="SELECT * FROM `candidate` WHERE `Class`='T' ORDER BY `candidate`.`Time` ASC, `candidate`.`round` ASC , `candidate`.`Number` ASC";
+											$B_sql_status="SELECT * FROM `candidate` WHERE `Class`='T' ORDER BY `candidate`.`Time` ASC, `candidate`.`round` ASC , `candidate`.`Number` ASC";
 											$A_result_status=mysqli_query($db_link,$A_sql_status) or die("查詢失敗");
 											$B_result_status=mysqli_query($db_link,$B_sql_status) or die("查詢失敗");
 											while ($A_rowres = mysqli_fetch_array($A_result_status, MYSQLI_BOTH))
@@ -163,24 +163,24 @@
 													{
 												?>
 														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $A_rowres[0]?>">點此報到</button></td>
-												<?php 
+												<?php
 													}
 													else if($A_rowres[6]=="302填寫中")
 													{
 												?>
 														<td style="background-color:<?php echo $Color?>">填寫中<button name="<?php echo "C_".$A_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
-												<?php 	
+												<?php
 													}
 													else
 													{
 													?>
 														<td style="background-color:<?php echo $Color?>"> </td>
-														
-												
-													<?php 	
+
+
+													<?php
 													}
 													if($B_rowres = mysqli_fetch_array($B_result_status, MYSQLI_BOTH))
-													{	
+													{
 														if($B_rowres[6]=="302填寫中")
 															$Color="#FFADAD";
 														else if($B_rowres[6]=="前往311...")
@@ -207,20 +207,20 @@
 														{
 													?>
 															<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">點此報到</button></td>
-													<?php 
+													<?php
 														}
 														else if($B_rowres[6]=="302填寫中")
 														{
 													?>
 														<td style="background-color:<?php echo $Color?>">填寫中<button name="<?php echo "C_".$B_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
-														
+
 													<?php
 														}
 														else
 														{
 														?>
 															<td style="background-color:<?php echo $Color?>"> </td>
-														<?php 	
+														<?php
 														}
 													}
 													else
@@ -238,7 +238,7 @@
 											<?php
 											}
 											while ($B_rowres = mysqli_fetch_array($B_result_status, MYSQLI_BOTH))
-											{	
+											{
 												if($B_rowres[6]=="302填寫中")
 													$Color="#FFADAD";
 												else if($B_rowres[6]=="前往311...")
@@ -271,19 +271,19 @@
 													{
 													?>
 														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">點此報到</button></td>
-													<?php 
+													<?php
 													}
 													else if($B_rowres[6]=="302填寫中")
 													{
 													?>
 														<td style="background-color:<?php echo $Color?>">填寫中<button name="<?php echo "C_".$B_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
-													<?php 	
-													}	
+													<?php
+													}
 													else
 													{
 													?>
 														<td style="background-color:<?php echo $Color?>"> </td>
-													<?php 	
+													<?php
 													}
 													?>
 												</tr>

@@ -130,7 +130,7 @@
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(考場內使用)</a></li>
+							<li><a href="elements.php">資料顯示(題目使用)</a></li>
 					<?php
 						}
 					?>
