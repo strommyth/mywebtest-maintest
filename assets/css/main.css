@@ -2356,13 +2356,15 @@
 		}
 
 		table.alt {
-			border-collapse: separate;
+			border-collapse: separate;;
 		}
 
 			table.alt tbody tr td {
 				border: solid 2px #000000;
 				border-left-width: 0;
 				border-top-width: 0;
+				position: absolute;
+				
 			}
 
 				table.alt tbody tr td:first-child {
@@ -3209,12 +3211,12 @@
 				}
 
 		}
-		
+
 		* {
 			box-sizing: border-box;
 		}
-		
-		
+
+
 		.zoom {
 			padding: 20px;
 			transition: transform .2s;
@@ -3229,8 +3231,8 @@
 			-webkit-transform: scale(1); /* Safari 3-8 */
 			transform: scale(1);
 		}
-		
-		
+
+
 		@font-face{
 			font-family: sevenSegment;
 			src: url(SevenSegment.ttf);
