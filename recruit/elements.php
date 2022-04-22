@@ -25,7 +25,7 @@
 						if(isset($_COOKIE['Uname']))
 						{
 							//已經登入
-							if($_COOKIE['Ulogin']=="管理員")
+							if($_COOKIE['Ulogin']=="管理員" || $_COOKIE['Ulogin']=='管理員2')
 								echo "<a href='logout.php' class='button alt'>Log Out</a>";
 							else
 								echo"<script language=\"JavaScript\">alert('當前帳號無權訪問此頁面');location.href=\"index.php\";</script>";
@@ -57,10 +57,10 @@
 						}
 					?>
 					<?php
-						if($_COOKIE['Ulogin']=='管理員')
+						if($_COOKIE['Ulogin']=='管理員' || $_COOKIE['Ulogin']=='管理員2')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(題目使用)</a></li>
+							<li><a href="interview.php">資料顯示((筆試考官使用))</a></li>
 					<?php
 						}
 					?>
@@ -84,7 +84,7 @@
 		<!-- Two -->
 			<section id="two" class="wrapper  special">
 				<div class="inner" style="max-width:90%">
-					<h2>資料顯示(題目使用)</h2>
+					<h2>資料顯示((筆試考官使用))</h2>
 					<h3>請等待<font style="background:#9BF6FF">"藍格"</font>的人的到來</h3>
 					<h3>面試完畢後請點選按鈕確認變成<font style="background:#A0C4FF">"靛格"</font></h3>
 						<div class="12u">
@@ -163,7 +163,7 @@
 											{
 												if($DATA_rowres[6]=="302填寫中")
 													$Color="#FFADAD";
-												else if($DATA_rowres[6]=="前往311...")
+												else if($DATA_rowres[6]=="402等待面試中")
 													$Color="#FFD6A5";
 												else if($DATA_rowres[6]=="402等待面試中")
 													$Color="#FDFFB6";
@@ -181,8 +181,7 @@
 												<tr>
 													<th style="text-align: center;width:20%;"><div style="overflow:auto;width:100%;height:120px;">准考證號<br>姓名<br>梯次場次<br>考生狀態</div></th>
 													<th style="text-align: center;width:42%;height:10%;"><div style="overflow:auto;width:100%;height:42px;">題目</div></th>
-													<th>T1分數</th>
-													<th>T2分數</th>
+													<th>分數</th>
 												</tr>
 												<tr>
 													<td rowspan="4" style="background-color:<?php echo $Color?>"><?php echo $DATA_rowres[0]."<br>".$DATA_rowres[3]."<br>".$DATA_rowres[4]."-".$DATA_rowres[5]."-".$DATA_rowres[7]."(".$DATA_rowres[5].")"."<br>".$DATA_rowres[6]?></td>
@@ -219,24 +218,89 @@
 													<?php
 													}
 													?>
+
+
+
+													<?php
+														if($_COOKIE['Ulogin']=='管理員')
+														{
+													?>
 													<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q1_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[19]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q1_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[14]?></textarea></td>
+
+													<?php
+												}
+														if($_COOKIE['Ulogin']=='管理員2')
+														{
+													?>
 														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q1_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[29]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q1_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[24]?></textarea></td>
+													<?php
+												}
+													?>
+
 													<tr>
 														<td style="background-color:<?php echo $Color?>"><font color="orange">假設您現在已經取得資訊工程學位，您想利用資訊科技來改善甚麼?怎麼做?<br></font><?php echo $DATA_rowres[10]?></td>
+														<?php
+															if($_COOKIE['Ulogin']=='管理員')
+															{
+														?>
 														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q2_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[20]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q2_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[15]?></textarea></td>
+														<?php
+														}
+														 ?>
+
+														 <?php
+	 														if($_COOKIE['Ulogin']=='管理員2')
+	 														{
+	 													?>
 															<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q2_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[30]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q2_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[25]?></textarea></td>
+														<?php
+													}
+														 ?>
 													</tr>
 													<tr>
 														<td style="background-color:<?php echo $Color?>"><font color="orange">最近令您印象深刻的資訊科技相關新聞是甚麼?為甚麼?<br></font><?php echo $DATA_rowres[11] ?></td>
+														<?php
+															if($_COOKIE['Ulogin']=='管理員')
+															{
+														?>
 														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q3_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[21]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q3_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[16]?></textarea></td>
+
+														<?php
+														}
+
+													 ?>
+													 <?php
+ 														if($_COOKIE['Ulogin']=='管理員2')
+ 														{
+ 													?>
 															<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q3_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[31]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q3_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[26]?></textarea></td>
+
+														<?php
+													}
+														 ?>
 
 													</tr>
 
 													<tr>
 														<td style="background-color:<?php echo $Color?>"><font color="orange">您認為就讀資訊工程的學生，需要具備怎麼樣的能力或特質呢?<br></font><?php echo $DATA_rowres[11] ?></td>
+														<?php
+															if($_COOKIE['Ulogin']=='管理員')
+															{
+														?>
 														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t1_q4_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[22]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t1_q4_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[17]?></textarea></td>
+														<?php
+													}
+														 ?>
+
+														 <?php
+	 														if($_COOKIE['Ulogin']=='管理員2')
+	 														{
+	 													?>
 														<td style="background-color:<?php echo $Color?>"><textarea name='<?php echo $DATA_rowres[0].'_t2_q4_score'?>'   placeholder='分數' rows='2' style=' resize: none;'><?php echo $DATA_rowres[32]?></textarea><textarea name='<?php echo $DATA_rowres[0].'_t2_q4_notice'?>'  placeholder='考生註記' rows='6' style=' resize: none;'><?php echo $DATA_rowres[27]?></textarea></td>
+
+														<?php
+													}
+														 ?>
 
 													</tr>
 

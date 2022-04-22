@@ -67,10 +67,11 @@
 					?>
 						<li><a href="checkin.php">報到狀態(報到處使用)</a></li>
 						<li><a href="status_302.php">填答狀態(C302使用)</a></li>
-						<li><a href="status_311.php">考生狀態(C311使用)</a></li>
+					<!--	<li><a href="status_311.php">考生狀態(C311使用)</a></li> -->
 						<li><a href="status_402.php">考生狀態(C402使用)</a></li>
 						<li><a href="status_420.php">考生狀態(C420使用)</a></li>
 						<li><a href="status_403.php">考生狀態(C403使用)</a></li>
+
 					<?php
 						}
 					?>
@@ -95,7 +96,7 @@
 					<?php
 					if ($_COOKIE['Ulogin']=='class2') {
 					?>
-					<li><a href="status_311.php">考生狀態(C311使用)</a></li>
+				<!--	<li><a href="status_311.php">考生狀態(C311使用)</a></li> -->
 					<?php
 				}
 					?>
@@ -127,10 +128,11 @@
 
 
 					<?php
-						if($_COOKIE['Ulogin']=='管理員')
+						if($_COOKIE['Ulogin']=='管理員' || $_COOKIE['Ulogin']=='管理員2')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(題目使用)</a></li>
+							<li><a href="elements.php">資料顯示((筆試考官使用))</a></li>
+							<li><a href="interview.php">面試分數(面試考官使用)</a></li>
 					<?php
 						}
 					?>
@@ -186,7 +188,7 @@
 						</div>
 						<div>
 							<h3>面試流程2</h3>
-							<p>302填寫完後至311休息等待面試</p>
+							<p>302填寫完後至420等待面試</p>
 						</div>
 					</div>
 					<div class="flex-item image fit round">

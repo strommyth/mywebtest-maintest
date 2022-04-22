@@ -24,7 +24,7 @@
 						if(isset($_COOKIE['Uname']))
 						{
 							//已經登入
-							if ($_COOKIE['Ulogin']=="管理員"||$_COOKIE['Ulogin']=="工作人員"||$_COOKIE['Ulogin']=="class2")
+							if ($_COOKIE['Ulogin']=="管理員"||$_COOKIE['Ulogin']=="工作人員"||$_COOKIE['Ulogin']=="class5")
 								echo "<a href='logout.php' class='button alt'>Log Out</a>";
 							else
 								echo"<script language=\"JavaScript\">alert('當前帳號無權訪問此頁面');location.href=\"index.php\";</script>";
@@ -48,7 +48,7 @@
 					?>
 						<li><a href="checkin.php">報到狀態(報到處使用)</a></li>
 						<li><a href="status_302.php">填答狀態(C302使用)</a></li>
-						<li><a href="status_311.php">考生狀態(C311使用)</a></li>
+			<!--			<li><a href="status_311.php">考生狀態(C311使用)</a></li> -->
 						<li><a href="status_402.php">考生狀態(C402使用)</a></li>
 						<li><a href="status_420.php">考生狀態(C420使用)</a></li>
 						<li><a href="status_403.php">考生狀態(C403使用)</a></li>
@@ -57,9 +57,9 @@
 					?>
 
 					<?php
-					if ($_COOKIE['Ulogin']=='class2') {
+					if ($_COOKIE['Ulogin']=='class5') {
 					?>
-					<li><a href="status_311.php">考生狀態(C311使用)</a></li>
+					<li><a href="status_403.php">考生狀態(403使用)</a></li>
 					<?php
 				}
 					?>
@@ -68,7 +68,7 @@
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(面試使用)</a></li>
+							<li><a href="interview.php">資料顯示((筆試考官使用))</a></li>
 					<?php
 						}
 					?>
@@ -89,18 +89,18 @@
 				</ul>
 			</nav>
 
+
 		<!-- Two -->
 			<section id="two" class="wrapper  special">
 				<div class="inner">
-					<h2>考生目前狀態(C311使用)</h2>
-					<h3><font style="background:#FFD6A5">"橘格"</font>應該正在前往311</h3>
-					<h3>確定進入311後請轉換為<font style="background:#FDFFB6">"黃格"</font>，並於指定場次時間提醒考生上420</h3>
+					<h2>考生目前狀態(403使用)</h2>
+					<h3><font style="background:#A0C4FF">"靛格"</font>剛面試完要來寫問卷</h3>
+					<h3>確定寫好後請變更為<font style="background:#FFC6FF">"紫格"</font></h3>
 					<hr>
 					<h3>
 					<font style="background:#F0EFEB">他還沒來</font>
 					(三樓電梯報到)-><font style="background:#FFADAD">302填寫中</font>
-					(填寫後自動偵測)-><font style="background:#FFD6A5">前往311...</font>
-					(抵達311)-><font style="background:#FDFFB6">402等待面試中</font>
+					(填寫後自動偵測)-><font style="background:#FFD6A5">402等待面試中</font>
 					(時間到請至420)<br>-><font style="background:#CAFFBF">抵達420</font>
 					(進入考場面試)-><font style="background:#9BF6FF">開始面試</font>
 					(面試完畢後)-><font style="background:#A0C4FF">回饋填寫中</font>
@@ -109,7 +109,7 @@
 					<hr>
 						<div class="12u">
 							<div class="table-wrapper" style="color:black;">
-								<form method="post" style="width:100%;" action="statuscheck_311.php">
+								<form method="post" style="width:100%;" action="statuscheck_403.php">
 									<table class="alt">
 										<thead>
 											<tr>
@@ -127,7 +127,6 @@
 										</thead>
 										<tbody>
 										<?php
-
 											$A_sql_status="SELECT * FROM `candidate` WHERE `Class`='T' ORDER BY `candidate`.`Time` ASC, `candidate`.`round` ASC , `candidate`.`Number` ASC";
 											$B_sql_status="SELECT * FROM `candidate` WHERE `Class`='T' ORDER BY `candidate`.`Time` ASC, `candidate`.`round` ASC , `candidate`.`Number` ASC";
 											$A_result_status=mysqli_query($db_link,$A_sql_status) or die("查詢失敗");
@@ -136,7 +135,7 @@
 											{
 												if($A_rowres[6]=="302填寫中")
 													$Color="#FFADAD";
-												else if($A_rowres[6]=="前往311...")
+												else if($A_rowres[6]=="402等待面試中")
 													$Color="#FFD6A5";
 												else if($A_rowres[6]=="402等待面試中")
 													$Color="#FDFFB6";
@@ -157,13 +156,13 @@
 													<td style="background-color:<?php echo $Color?>"><?php echo $A_rowres[4]."-".$A_rowres[7]."(".$A_rowres[5].")"?></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $A_rowres[6]?></td>
 												<?php
-													if($A_rowres[6]=="前往311...")
+													if($A_rowres[6]=="回饋填寫中")
 													{
 												?>
-														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $A_rowres[0]?>">確定抵達</button></td>
+														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $A_rowres[0]?>">填寫完畢</button></td>
 												<?php
 													}
-													else if($A_rowres[6]=="402等待面試中")
+													else if($A_rowres[6]=="面試完畢")
 													{
 												?>
 														<td style="background-color:<?php echo $Color?>"><button name="<?php echo "C_".$A_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
@@ -180,7 +179,7 @@
 													{
 														if($B_rowres[6]=="302填寫中")
 															$Color="#FFADAD";
-														else if($B_rowres[6]=="前往311...")
+														else if($B_rowres[6]=="402等待面試中")
 															$Color="#FFD6A5";
 														else if($B_rowres[6]=="402等待面試中")
 															$Color="#FDFFB6";
@@ -194,19 +193,19 @@
 															$Color="#FFC6FF";
 														else//他還沒來
 															$Color="#F0EFEB";
-													?>
+												?>
 														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[0]?></td>
 														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[1]?></td>
 														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[4]."-".$B_rowres[7]."(".$B_rowres[5].")"?></td>
 														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[6]?></td>
 														<?php
-														if($B_rowres[6]=="前往311...")
+														if($B_rowres[6]=="回饋填寫中")
 														{
 														?>
-															<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">確定抵達</button></td>
+															<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">填寫完畢</button></td>
 														<?php
 														}
-														else if($B_rowres[6]=="402等待面試中")
+														else if($B_rowres[6]=="面試完畢")
 														{
 														?>
 															<td style="background-color:<?php echo $Color?>"><button name="<?php echo "C_".$B_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
@@ -237,7 +236,7 @@
 											{
 												if($B_rowres[6]=="302填寫中")
 													$Color="#FFADAD";
-												else if($B_rowres[6]=="前往311...")
+												else if($B_rowres[6]=="402等待面試中")
 													$Color="#FFD6A5";
 												else if($B_rowres[6]=="402等待面試中")
 													$Color="#FDFFB6";
@@ -260,16 +259,16 @@
 													<td style="background-color:#D0D0D0"></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[0]?></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[1]?></td>
-														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[4]."-".$B_rowres[7]."(".$B_rowres[5].")"?></td>
+													<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[4]."-".$B_rowres[7]."(".$B_rowres[5].")"?></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[6]?></td>
 												<?php
-													if($B_rowres[6]=="前往311...")
+													if($B_rowres[6]=="回饋填寫中")
 													{
 												?>
-														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">確定抵達</button></td>
+														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">填寫完畢</button></td>
 												<?php
 													}
-													else if($B_rowres[6]=="402等待面試中")
+													else if($B_rowres[6]=="面試完畢")
 													{
 												?>
 														<td style="background-color:<?php echo $Color?>"><button name="<?php echo "C_".$B_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>

@@ -14,7 +14,7 @@
 			else if($rowres[6]=="已去面試")
 				$sql_StatusChange="UPDATE candidate SET Checkin =\"他還沒來\" WHERE ExamID=\"".$id."\"";
 			$result3=mysqli_query($db_link,$sql_StatusChange) or die("修改失敗");
-			echo"<script language=\"JavaScript\">alert('".$id." ".$rowres[1]." 已成功報到，考場".$rowres[3]."，第".$rowres[4]."場，第".$rowres[5]."梯');location.href=\"checkin.php\";</script>";
+			echo"<script language=\"JavaScript\">alert('".$id." ".$rowres[3]." 已成功報到，考場".$rowres[4]."，第".$rowres[5]."場，第".$rowres[7]."梯');location.href=\"checkin.php\";</script>";
 		}
 		else if(isset($_POST[$Cid]))
 		{

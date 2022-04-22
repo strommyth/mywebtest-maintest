@@ -24,7 +24,7 @@
 						if(isset($_COOKIE['Uname']))
 						{
 							//已經登入
-							if ($_COOKIE['Ulogin']=="管理員"||$_COOKIE['Ulogin']=="工作人員"||$_COOKIE['Ulogin']=="class4")
+							if ($_COOKIE['Ulogin']=="管理員"||$_COOKIE['Ulogin']=="工作人員"||$_COOKIE['Ulogin']=="class1")
 								echo "<a href='logout.php' class='button alt'>Log Out</a>";
 							else
 								echo"<script language=\"JavaScript\">alert('當前帳號無權訪問此頁面');location.href=\"index.php\";</script>";
@@ -43,12 +43,12 @@
 					<li><a href="index.php">首頁</a></li>
 					<li><a href="survey.php">問卷作答(考生使用)</a></li>
 					<?php
-						if($_COOKIE['Ulogin']=='管理員'||$_COOKIE['Ulogin']=='工作人員')
+						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
 						<li><a href="checkin.php">報到狀態(報到處使用)</a></li>
 						<li><a href="status_302.php">填答狀態(C302使用)</a></li>
-						<li><a href="status_311.php">考生狀態(C311使用)</a></li>
+				<!--		<li><a href="status_311.php">考生狀態(C311使用)</a></li> -->
 						<li><a href="status_402.php">考生狀態(C402使用)</a></li>
 						<li><a href="status_420.php">考生狀態(C420使用)</a></li>
 						<li><a href="status_403.php">考生狀態(C403使用)</a></li>
@@ -57,18 +57,19 @@
 					?>
 
 					<?php
-					if ($_COOKIE['Ulogin']=='class4') {
+					if ($_COOKIE['Ulogin']=='class1') {
 					?>
-					<li><a href="status_420.php">考生狀態(420使用)</a></li>
+					<li><a href="status_302.php">填答狀態(C302使用)</a></li>
 					<?php
 				}
 					?>
+
 
 					<?php
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(面試使用)</a></li>
+							<li><a href="interview.php">資料顯示((筆試考官使用))</a></li>
 					<?php
 						}
 					?>
@@ -89,18 +90,19 @@
 				</ul>
 			</nav>
 
+
 		<!-- Two -->
 			<section id="two" class="wrapper  special">
 				<div class="inner">
-					<h2>考生目前狀態(420使用)</h2>
-					<h3><font style="background:#CAFFBF">"綠格"</font>正在等待面試</h3>
-					<h3>開始面試後請變更為<font style="background:#9BF6FF">"藍格"</font></h3>
+					<h2>考生目前狀態(C302使用)</h2>
+					<h3>表上有多少<font style="background:#FFADAD">"紅格"</font>，教室內就該有多少人</h3>
+					<h3>填寫完畢要離開教室，務必確認他是否變<font style="background:#FFD6A5">"橘格"</font></h3>
 					<hr>
 					<h3>
 					<font style="background:#F0EFEB">他還沒來</font>
 					(三樓電梯報到)-><font style="background:#FFADAD">302填寫中</font>
-					(填寫後自動偵測)-><font style="background:#FFD6A5">前往311...</font>
-					(抵達311)-><font style="background:#FDFFB6">402等待面試中</font>
+					(填寫後自動偵測)-><font style="background:#FFD6A5">402等待面試中</font>
+
 					(時間到請至420)<br>-><font style="background:#CAFFBF">抵達420</font>
 					(進入考場面試)-><font style="background:#9BF6FF">開始面試</font>
 					(面試完畢後)-><font style="background:#A0C4FF">回饋填寫中</font>
@@ -109,7 +111,7 @@
 					<hr>
 						<div class="12u">
 							<div class="table-wrapper" style="color:black;">
-								<form method="post" style="width:100%;" action="statuscheck_420.php">
+								<form method="post" style="width:100%;" action="changecheckin.php">
 									<table class="alt">
 										<thead>
 											<tr>
@@ -136,7 +138,7 @@
 											{
 												if($A_rowres[6]=="302填寫中")
 													$Color="#FFADAD";
-												else if($A_rowres[6]=="前往311...")
+												else if($A_rowres[6]=="402等待面試中")
 													$Color="#FFD6A5";
 												else if($A_rowres[6]=="402等待面試中")
 													$Color="#FDFFB6";
@@ -153,34 +155,16 @@
 												?>
 												<tr>
 													<td style="background-color:<?php echo $Color?>"><?php echo $A_rowres[0]?></td>
-													<td style="background-color:<?php echo $Color?>"><?php echo $A_rowres[1]?></td>
+													<td style="background-color:<?php echo $Color?>"><?php echo $A_rowres[3]?></td>
 														<td style="background-color:<?php echo $Color?>"><?php echo $A_rowres[4]."-".$A_rowres[7]."(".$A_rowres[5].")"?></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $A_rowres[6]?></td>
+													<td style="background-color:<?php echo $Color?>"> </td>
 												<?php
-													if($A_rowres[6]=="抵達420")
-													{
-												?>
-														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $A_rowres[0]?>">入場面試</button></td>
-												<?php
-													}
-													else if($A_rowres[6]=="開始面試")
-													{
-												?>
-														<td style="background-color:<?php echo $Color?>"><button name="<?php echo "C_".$A_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
-												<?php
-													}
-													else
-													{
-													?>
-														<td style="background-color:<?php echo $Color?>"> </td>
-													<?php
-													}
-
 													if($B_rowres = mysqli_fetch_array($B_result_status, MYSQLI_BOTH))
 													{
 														if($B_rowres[6]=="302填寫中")
 															$Color="#FFADAD";
-														else if($B_rowres[6]=="前往311...")
+														else if($B_rowres[6]=="402等待面試中")
 															$Color="#FFD6A5";
 														else if($B_rowres[6]=="402等待面試中")
 															$Color="#FDFFB6";
@@ -199,25 +183,9 @@
 														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[1]?></td>
 														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[4]."-".$B_rowres[7]."(".$B_rowres[5].")"?></td>
 														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[6]?></td>
+													<td style="background-color:<?php echo $Color?>"> </td>
 														<?php
-														if($B_rowres[6]=="抵達420")
-														{
-														?>
-															<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">入場面試</button></td>
-														<?php
-														}
-														else if($B_rowres[6]=="開始面試")
-														{
-														?>
-															<td style="background-color:<?php echo $Color?>"><button name="<?php echo "C_".$B_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
-														<?php
-														}
-														else
-														{
-														?>
-															<td style="background-color:<?php echo $Color?>"> </td>
-														<?php
-														}
+
 													}
 													else
 													{
@@ -235,22 +203,22 @@
 											}
 											while ($B_rowres = mysqli_fetch_array($B_result_status, MYSQLI_BOTH))
 											{
-												if($B_rowres[6]=="302填寫中")
-													$Color="#FFADAD";
-												else if($B_rowres[6]=="前往311...")
-													$Color="#FFD6A5";
-												else if($B_rowres[6]=="402等待面試中")
-													$Color="#FDFFB6";
-												else if($B_rowres[6]=="抵達420")
-													$Color="#CAFFBF";
-												else if($B_rowres[6]=="開始面試")
-													$Color="#9BF6FF";
-												else if($B_rowres[6]=="回饋填寫中")
-													$Color="#A0C4FF";
-												else if($B_rowres[6]=="面試完畢")
-													$Color="#FFC6FF";
-												else//他還沒來
-													$Color="#F0EFEB";
+														if($B_rowres[6]=="302填寫中")
+															$Color="#FFADAD";
+														else if($B_rowres[6]=="402等待面試中")
+															$Color="#FFD6A5";
+														else if($B_rowres[6]=="402等待面試中")
+															$Color="#FDFFB6";
+														else if($B_rowres[6]=="抵達420")
+															$Color="#CAFFBF";
+														else if($B_rowres[6]=="開始面試")
+															$Color="#9BF6FF";
+														else if($B_rowres[6]=="回饋填寫中")
+															$Color="#A0C4FF";
+														else if($B_rowres[6]=="面試完畢")
+															$Color="#FFC6FF";
+														else//他還沒來
+															$Color="#F0EFEB";
 											?>
 												<tr>
 													<td style="background-color:#D0D0D0"></td>
@@ -260,28 +228,10 @@
 													<td style="background-color:#D0D0D0"></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[0]?></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[1]?></td>
-														<td style="background-color:<?php echo $Color?>"><?php echo "T-".$B_rowres[4]."-".$B_rowres[7]."(".$B_rowres[5].")"?></td>
+														<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[4]."-".$B_rowres[7]."(".$B_rowres[5].")"?></td>
 													<td style="background-color:<?php echo $Color?>"><?php echo $B_rowres[6]?></td>
-												<?php
-													if($B_rowres[6]=="抵達420")
-													{
-												?>
-														<td style="background-color:<?php echo $Color?>"><button name="<?php echo $B_rowres[0]?>">入場面試</button></td>
-												<?php
-													}
-													else if($B_rowres[6]=="開始面試")
-													{
-												?>
-														<td style="background-color:<?php echo $Color?>"><button name="<?php echo "C_".$B_rowres[0]?>" class="button special small" style="padding: 0 0.5em;">搞錯了</button></td>
-												<?php
-													}
-													else
-													{
-													?>
-														<td style="background-color:<?php echo $Color?>"> </td>
-													<?php
-													}
-?>
+													<td style="background-color:<?php echo $Color?>"> </td>
+
 												</tr>
 											<?php
 											}?>
@@ -313,7 +263,6 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
 
 	</body>
 </html>

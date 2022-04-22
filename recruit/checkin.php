@@ -24,7 +24,7 @@
 						if(isset($_COOKIE['Uname']))
 						{
 							//已經登入
-							if ($_COOKIE['Ulogin']=="管理員"||$_COOKIE['Ulogin']=="工作人員"||$_COOKIE['Ulogin']=="class0")
+							if ($_COOKIE['Ulogin']=="管理員"||$_COOKIE['Ulogin']=="工作人員"||$_COOKIE['Ulogin']=="class0" || $_COOKIE['Ulogin']=='管理員2')
 								echo "<a href='logout.php' class='button alt'>Log Out</a>";
 							else
 								echo"<script language=\"JavaScript\">alert('當前帳號無權訪問此頁面');location.href=\"index.php\";</script>";
@@ -43,12 +43,12 @@
 					<li><a href="index.php">首頁</a></li>
 					<li><a href="survey.php">問卷作答(考生使用)</a></li>
 					<?php
-						if($_COOKIE['Ulogin']=='管理員'||$_COOKIE['Ulogin']=='工作人員')
+						if($_COOKIE['Ulogin']=='管理員'||$_COOKIE['Ulogin']=='工作人員' || $_COOKIE['Ulogin']=='管理員2')
 						{
 					?>
 						<li><a href="checkin.php">報到狀態(報到處使用)</a></li>
 						<li><a href="status_302.php">填答狀態(C302使用)</a></li>
-						<li><a href="status_311.php">考生狀態(C311使用)</a></li>
+					<!--	<li><a href="status_311.php">考生狀態(C311使用)</a></li> -->
 						<li><a href="status_402.php">考生狀態(C402使用)</a></li>
 						<li><a href="status_420.php">考生狀態(C420使用)</a></li>
 						<li><a href="status_403.php">考生狀態(C403使用)</a></li>
@@ -67,10 +67,10 @@
 
 
 					<?php
-						if($_COOKIE['Ulogin']=='管理員')
+						if($_COOKIE['Ulogin']=='管理員' || $_COOKIE['Ulogin']=='管理員2')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(題目使用)</a></li>
+							<li><a href="interview.php">資料顯示((筆試考官使用))</a></li>
 					<?php
 						}
 					?>
@@ -102,8 +102,8 @@
 					<h3>
 					<font style="background:#F0EFEB">他還沒來</font>
 					(三樓電梯報到)-><font style="background:#FFADAD">302填寫中</font>
-					(填寫後自動偵測)-><font style="background:#FFD6A5">前往311...</font>
-					(抵達311)-><font style="background:#FDFFB6">402等待面試中</font>
+					(填寫後自動偵測)-><font style="background:#FFD6A5">402等待面試中</font>
+
 					(時間到請至420)<br>-><font style="background:#CAFFBF">抵達420</font>
 					(進入考場面試)-><font style="background:#9BF6FF">開始面試</font>
 					(面試完畢後)-><font style="background:#A0C4FF">回饋填寫中</font>
@@ -138,7 +138,7 @@
 											{
 												if($A_rowres[6]=="302填寫中")
 													$Color="#FFADAD";
-												else if($A_rowres[6]=="前往311...")
+												else if($A_rowres[6]=="402等待面試中")
 													$Color="#FFD6A5";
 												else if($A_rowres[6]=="402等待面試中")
 													$Color="#FDFFB6";
@@ -183,7 +183,7 @@
 													{
 														if($B_rowres[6]=="302填寫中")
 															$Color="#FFADAD";
-														else if($B_rowres[6]=="前往311...")
+														else if($B_rowres[6]=="402等待面試中")
 															$Color="#FFD6A5";
 														else if($B_rowres[6]=="402等待面試中")
 															$Color="#FDFFB6";
@@ -241,7 +241,7 @@
 											{
 												if($B_rowres[6]=="302填寫中")
 													$Color="#FFADAD";
-												else if($B_rowres[6]=="前往311...")
+												else if($B_rowres[6]=="402等待面試中")
 													$Color="#FFD6A5";
 												else if($B_rowres[6]=="402等待面試中")
 													$Color="#FDFFB6";

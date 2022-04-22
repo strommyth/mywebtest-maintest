@@ -67,7 +67,7 @@
 					?>
 						<li><a href="checkin.php">報到狀態(報到處使用)</a></li>
 						<li><a href="status_302.php">填答狀態(C302使用)</a></li>
-						<li><a href="status_311.php">考生狀態(C311使用)</a></li>
+					<!--	<li><a href="status_311.php">考生狀態(C311使用)</a></li> -->
 						<li><a href="status_402.php">考生狀態(C402使用)</a></li>
 						<li><a href="status_420.php">考生狀態(C420使用)</a></li>
 						<li><a href="status_403.php">考生狀態(C403使用)</a></li>
@@ -78,7 +78,7 @@
 						if($_COOKIE['Ulogin']=='管理員')
 						{
 					?>
-							<li><a href="elements.php">資料顯示(面試使用)</a></li>
+							<li><a href="interview.php">資料顯示((筆試考官使用))</a></li>
 					<?php
 						}
 					?>

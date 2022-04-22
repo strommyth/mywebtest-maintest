@@ -13,7 +13,7 @@
 		$Q5=preg_replace($pattern, $replace, $_POST['Q5']);
 
 
-		$sql_AnsSet="UPDATE candidate SET Qc1 =\"".$Qc1."\",Checkin =\"前往311...\",Q1 =\"".$Q1."\",Q2 =\"".$Q2."\",Q3 =\"".$Q3."\",Q4 =\"".$Q4."\",Q5 =\"".$Q5."\" WHERE ExamID=\"".$_COOKIE['Uname']."\"";
+		$sql_AnsSet="UPDATE candidate SET Qc1 =\"".$Qc1."\",Checkin =\"402等待面試中\",Q1 =\"".$Q1."\",Q2 =\"".$Q2."\",Q3 =\"".$Q3."\",Q4 =\"".$Q4."\",Q5 =\"".$Q5."\" WHERE ExamID=\"".$_COOKIE['Uname']."\"";
 		$result3=mysqli_query($db_link,$sql_AnsSet) or die("填寫失敗");
 		echo"<script language=\"JavaScript\">alert('填寫完畢，請查看狀態');location.href=\"survey.php\";</script>";
 	}
